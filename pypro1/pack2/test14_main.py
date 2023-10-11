@@ -27,3 +27,23 @@ kbs()
 Mbc()
 print(score)
 print("=" * 50)
+
+# 다른 패키지 내의 모듈 읽기
+import moduleTest.test14etc
+moduleTest.test14etc.Hap(5, 3)
+
+from moduleTest.test14etc import Cha
+Cha(5, 3)
+
+import test14ect2
+test14ect2.Gop(2, 4)
+from test14ect2 import Nanugi
+Nanugi(5, 3)
+
+print("=" * 50)
+
+
+
+
+
+
