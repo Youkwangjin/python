@@ -15,7 +15,7 @@ def gogo():
     a.forward(100)
     
     input()
-if __name__=='__main__':  # 메인 모듈 (가독성을 위해 작성한다.)
+if __name__=='__main__':  # 메인 모듈 (가독성을 위해 작성한다)
     gogo()
     '''
 ak = turtle.Turtle()
