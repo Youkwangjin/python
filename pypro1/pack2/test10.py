@@ -1,7 +1,5 @@
 # 변수의 생존 범위 : global, local
 # Local > Enclosing function > global > Builtin
-from dask.array.random import choice
-
 
 player = '국가대표' # 전역변수(모듈의 어디서든 공유 가능)
 

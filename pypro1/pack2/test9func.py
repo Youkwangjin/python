@@ -1,6 +1,5 @@
 # 함수 : 반복소스의 단순화를 목표로, 여러 개의 수행문을 하나의 이름으로 묶은 실행단위
 # 내장함수
-from pack1.test3 import mydic
 print(sum([3,4,5])) # List
 print(bin(8))
 print(int(1.5), float(3), str(5) + '오')
