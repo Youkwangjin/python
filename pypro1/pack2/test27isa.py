@@ -1,19 +1,3 @@
-'''
-person
--------
-say
-nai
---------
-printinfo
-hello
-'''
-'''
-person의 파생 클래스 두개
-employee랑 worker
---------
-worker에 자식 클래스
-programer
-'''
 # 상속 연습
 print('클래스는 모듈의 멤버이다')  # 자바랑 다른점
 
@@ -87,7 +71,7 @@ class Worker(Person):
 
 
 w = Worker('30')
-print(w.say, w.nai)     # 나이30은 Person이 가지고 있는게 아니라 Worker 인스턴스가 가지고 있음(say도 마찬가지) / 자식이 가지고 있으면 부모는 은닉화
+print(w.say, w.nai)  # 나이30은 Person이 가지고 있는게 아니라 Worker 인스턴스가 가지고 있음(say도 마찬가지) / 자식이 가지고 있으면 부모는 은닉화
 #w.printInfo()       # 이것도 마찬가지로 Worker의 인스턴스 say와 nai를 가지고 Person의 printInfo로 감 / 만약 Worker(자식)가 가지고 있지 않다면 부모껄로 가지고 옴
 w.wprintInfo()
 
@@ -96,7 +80,7 @@ print('***' * 20)
 class Programmer(Worker):
     def __init__(self, nai):
         print('Programmer 생성자')
-        # super().__init__(nai)   # Bound method call
+        # super().__init__(nai)     # Bound method call
         Worker.__init__(self, nai)  # UnBound method call
 
     def pprintInfo(self):

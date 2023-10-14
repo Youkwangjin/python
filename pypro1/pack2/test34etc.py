@@ -1,6 +1,6 @@
 from abc import abstractmethod, ABCMeta
 
-# 추상 클래스
+# 추상 클래스 (객체 생성이 안된다(규칙 x))
 class Employee(metaclass=ABCMeta):
     def __init__(self, irum, nai):
         self.irum = irum

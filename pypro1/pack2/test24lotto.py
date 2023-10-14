@@ -20,7 +20,7 @@ class LottoMachine:
         random.shuffle(self.ballList) # random 함수를 사용해서 숫자들이 랜덤으로 나온다.
         for a in range(45):
             print(self.ballList[a].num, end = ' ')
-        print() # 콘솔에 잘보이게 하기 위해 쓴거임
+        print()# 콘솔에 잘      보이게 하기 위해 쓴거임
         print("=" * 50)
         return self.ballList[0:6] # 0번째 부터 5번째 까지 숫자를 출력
     
@@ -36,3 +36,4 @@ class LottoUI:
             
 if __name__ == '__main__':
     LottoUI().playLotto()
+
