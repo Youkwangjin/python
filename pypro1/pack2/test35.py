@@ -3,7 +3,7 @@
 class SingletonClass:
     inst = None
 
-    def __new__(cls): # 객체의 생성을 담당한다. init 메서드에 의해 초기화된다.
+    def __new__(cls):  # 객체의 생성을 담당한다. init 메서드에 의해 초기화된다.
         if cls.inst is None:
             cls.inst = object.__new__(cls)
         return cls.inst
