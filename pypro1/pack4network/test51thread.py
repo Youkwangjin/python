@@ -1,12 +1,12 @@
 # thread의 활성화, 비활성화
 import threading
 
-bread_plate = 0 # 빵 접시 : 공유 자원
+bread_plate = 0  # 빵 접시 : 공유 자원
 lock = threading.Condition()  # Lock을 위한 조건변수
 
 class Maker(threading.Thread):
     def run(self):
-        global  bread_plate
+        global bread_plate
         for _ in range(30):
             lock.acquire()
             while bread_plate >= 10:
@@ -20,7 +20,7 @@ class Maker(threading.Thread):
 
 class Consumer(threading.Thread):
     def run(self):
-        global  bread_plate
+        global bread_plate
         for _ in range(30):
             lock.acquire()
             while bread_plate < 1:
@@ -34,10 +34,10 @@ class Consumer(threading.Thread):
 
 mak = []; con = []
 for i in range(5):
-    mak.append(Maker()) # 메이커 생성자 호출 
+    mak.append(Maker())  # 메이커 생성자 호출
 
 for i in range(5):
-    mak.append(Consumer()) # 컨슈머 생성자 호출
+    mak.append(Consumer())  # 컨슈머 생성자 호출
 
 for th1 in mak:
     th1.start()

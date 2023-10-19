@@ -27,9 +27,9 @@ def chubal():
         sql = """
              select jikwon_no, jikwon_name, buser_num, jikwon_pay, jikwon_jik from jikwon where buser_num={0}
         """.format(buser_no)
-        print(sql)
+        # print(sql)
         cursor.execute(sql)
-        datas = cursor.fetchall()
+        datas = cursor.fetchall()  # fetchall() 메서드를 사용하여 SQL 쿼리에 의해 검색된 모든 행의 데이터를 포함하는 리스트
         print(datas)
         print(len(datas))
 

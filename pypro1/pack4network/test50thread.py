@@ -3,9 +3,9 @@
 # from threading import *
 # from time import *
 
-import threading, time
+import threading,time
 
-g_count = 0 # 전역변수는 자동으로 스레드의 공유 자원이 됨
+g_count = 0  # 전역변수는 자동으로 스레드의 공유 자원이 됨
 
 lock = threading.Lock()
 
