@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>list</title>
+<link rel="stylesheet" type="text/css" href="/static/css/test.css">
+<script type="text/javascript" src="/static/js/test.js"></script>
+<!--
+<script>
+	window.onload = function(){
+		alert("자바 스크립트");
+	}
+</script>
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+	$().ready(function(){
+		// alert("자바 스크립트 제이쿼리");
+		
+		$("#myImg").click(function(){
+			abc();
+		})
+	})
+</script>
+</head>
+<body>
+결과는 &nbsp;{{irum}}&nbsp; 입니다.
+<p/>
+<img src="/static/images/dog.jpg" id="myImg" /><br/>
+<button onclick="abc()">뒤로가기</button>
+</body>
+</html>
