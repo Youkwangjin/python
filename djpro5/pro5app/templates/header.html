@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>header</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/test.css' %}">
+</head>
+<body>
+머리글
+<hr/>
+{% block content %}
+{% endblock %}
+<hr/>
+{% include "footer.html "%}
+</body>
+</html>
