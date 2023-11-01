@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>page2</title>
+<script>
+	window.onload = function(){
+		document.querySelector("#btnOk").onclick = function(){
+			//alert("a")
+			frm.submit();
+		}
+	}
+</script>
+</head>
+<body>
+<table>
+	<tr>
+		<td>
+			<img src="/static/images/pic2.jpg" style="width:30%" />
+		</td>
+		<td>
+			<pre>
+				패턴/프린트: 단색(무지)
+				제품명(신발이름): 스니커즈 아디다스
+				신발 종류: 운동화
+				가격 : 20000원
+				소재: 가죽
+				사용대상 구분: 남성용
+				쿠팡상품번호: 9997723911 - 19144333762
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<form action="cart" name="frm" method="post">{% csrf_token %}
+				<input type="hidden" name="name" value="스니커즈 아디다스">
+				<input type="hidden" name="price" value="20000">
+				<input type="button" id="btnOk" value="장바구니에 담기">
+				<input type="button" value="홈으로" onclick="history.back()">
+			</form>		
+		</td>
+	</tr>
+</table>
+</body>
+</html>
