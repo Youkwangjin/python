@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>list</title>
+</head>
+<body>
+<h2>* 상품 정보 *</h2>
+{% if datas.count > 0 %}
+{% for a in datas %}
+	<div>
+		<b>{{a.id}}</b>
+		<b>{{a.code}}</b>
+		<b>{{a.name}}</b>
+		<b>{{a.price}}</b>
+		<b>{{a.pub_date}}</b>	
+	</div>
+
+{% endfor %}
+{% else %}
+<p>자료가 없습니다!</p>
+{% endif %}
+</body>
+</html>
