@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>insert</title>
+</head>
+<script>
+	window.onload = function(){
+		document.getElementById("btnOk").onclick=confirmFunc;
+		
+		function confirmFunc() {
+			if (familyFrm.name.value === "") {
+				familyFrm.name.placeholder = "이름을 입력하세요";
+				return false;
+			}
+			if (familyFrm.age.value === "") {
+				familyFrm.age.placeholder = "나이을 입력하세요";
+				return false;
+			}
+			if (familyFrm.tel.value === "") {
+				familyFrm.tel.placeholder = "전화번호를 입력하세요";
+				return false;
+			}
+			familyFrm.submit()
+		}
+	}
+	
+</script>
+<body>
+<form action="/insertok" method="post" name="familyFrm" onsubmit="return false"> {% csrf_token %}
+	이름 : <input type="text" name="name" /><br/>
+	나이 : <input type="text" name="age" /><br/>
+	전화 : <input type="text" name="tel" /><br/>
+	성별 :
+		  <input type="radio" name="gen" value="남"> 남
+          <input type="radio" name="gen" value="여"> 여<br/>
+	<input type='button' id="btnOk" value="추가하기">
+</form>
+</body>
+</html>

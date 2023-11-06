@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+** DB 목록 **<p/>
+<a href="insert">자료 추가</a>
+<table border="1">
+   <tr><th>아이디</th><th>이름</th><th>나이</th><th>전화</th><th>성별</th></tr>
+   {% if fdatas %}
+   {% for f in fdatas %}
+   <tr>
+      <td>{{ f.id }}</td>
+      <td>{{ f.name }}</td>
+      <td>{{ f.age }}</td>
+      <td>{{ f.tel }}</td>
+      <td>{{ f.gen }}</td>
+   </tr>
+   {% endfor %}
+   {% else %}
+   <tr><td colspan="4">자료가 없어요</td></tr>
+   {% endif %}
+</table>
+<p>인원 수 : {{ total }}</p>
+<p>나이 평균 : {{ avg_age }}</p>
+</body>
+</html>
