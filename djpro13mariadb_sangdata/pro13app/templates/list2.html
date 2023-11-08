@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>list2</title>
+<script>
+	function func(arg){
+		//alert(arg);
+		let result = confirm("정말 삭제할까요??")
+		if(result) {
+			document.getElementById(arg).submit();
+		}
+	}
+</script>
+</head>
+<body>
+<h2>상품 목록(페이징 있는 경우)</h2><p/>
+<div style="width: 80%; text-align: right;">
+	<a href="/sangpum/insert">상품 추가</a>
+</div>
+<br/>
+<table border="1" style="width: 80%;">
+	<tr>
+		<th>코드</th>
+		<th>상품</th>
+		<th>수량</th>
+		<th>단가</th>
+		<th>기타</th>
+	</tr>
+	{%if datas %}
+	{%for s in datas%}
+	<tr><!-- <td>{{s.0}}</td> 이 방법은 tuple 방식-->
+		<td>{{s.code}}</td>
+		<td>{{s.sang}}</td>
+		<td>{{s.su}}</td>
+		<td>{{s.dan}}</td>
+		<td>
+			<a href="/sangpum/update?code={{s.code}}">수정</a> /
+			<!-- 삭제하기 alret 창 띄우지 않은 것
+			<a href="/sangpum/delete?code={{s.code}}">삭제</a>
+			-->
+			<form action="/sangpum/delete" name="frm" method="get" id="{{s.code}}" style="display: inline;">
+				<input type="hidden" name="code" value="{{s.code}}">
+				<!-- a 태그의 고유 기능을 죽이고 onclick 기능을 주기 위해 javascript:void(0) 사용-->
+				<a href="javascript:void(0); onclick=func({{s.code}})">삭제</a>
+			</form>
+		</td>
+	</tr>
+	{% endfor %}
+	<!-- 페이징 -->
+	<tr>
+		<td colspan="5">
+			{% if datas.paginator.num_pages > 1%} <!-- datas.paginator.num_pages은 전체 페이지의 수 -->
+			<div>
+				{% if datas.has_previous %} <!-- 이전 페이지가 있는 경우 -->
+					<a href="/sangpum/list?page={{datas.previous_page_number}}">&laquo;이전</a>			
+				{% endif %}
+				
+				{% if datas.has_next %} <!-- 이전 페이지가 없는 경우 -->
+					<a href="/sangpum/list?page={{datas.next_page_number}}">다음&raquo;</a>			
+				{% endif %}
+					
+				&nbsp;&nbsp;
+				(페이지:{{datas.number}} / {{datas.paginator.num_pages}})
+			</div>
+			{% endif %}
+			<hr/>
+			{% for p in allpage %}
+				{% if p > 0 %}
+					{% if p == datas.number %} <!-- 현재 페이지 -->
+						[{{p}}]
+					{% elif p != datas.number %}
+						<a href="/sangpum/list?page={{p}}">{{p}}</a>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</td>
+	</tr>
+	{% else %}
+	<tr>
+		<td colspan="4">자료가 없어요</td>
+	</tr>
+	{% endif %}
+</table>
+</body>
+</html>
