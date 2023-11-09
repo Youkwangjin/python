@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>board</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body style="margin: 20px;">
+<!-- with block test 
+{% with list='1 2 3 4 5' %}
+	{% for num in list.split %}
+		{{num}},
+	{% endfor %}
+{% endwith %}
+<br/>
+{% with '1 2 3 4 5' as range %}
+	{% for num in range %}
+		{{num}}!
+	{% endfor %}
+{% endwith %}
+-->
+<div style="width: 95%; text-align: center;">
+	<h3>게시판 목록</h3>
+</div>
+<a href="/board/insert">작성하기</a><br/>
+<table style="width: 95%;" class="table">
+	<tr>
+		<th>번호</th>
+		<th>제 목</th>
+		<th>작성자</th>
+		<th>작성일</th>
+		<th>조회수</th>
+	</tr>
+	{% if datas %}
+	{% for d in datas %}
+	<tr>
+		<td>{{d.id}}</td>
+		<td>
+			{% with ''|center:d.nested as range %}
+            {% for _ in range %}
+              	&nbsp;&nbsp;
+            {% endfor %}
+            {% endwith %}
+			<a href="/board/content?id={{d.id}}&page={{datas.number}}">{{d.title}}</a>        
+		</td>
+		<td>{{d.name}}</td>
+		<td>{{d.bdate.year}}.{{d.bdate.month}}.{{d.bdate.day}}</td>
+		<td>{{d.readcnt}}</td>
+	</tr>
+	{% endfor %}
+		<!-- 페이징 -->
+	<tr>
+		<td colspan="5" style="text-align: center;">
+			{% if datas.paginator.num_pages > 1%} <!-- datas.paginator.num_pages은 전체 페이지의 수 -->
+			<div>
+				{% if datas.has_previous %} <!-- 이전 페이지가 있는 경우 -->
+					<a href="/board/list?page={{datas.previous_page_number}}">&laquo;이전</a>			
+				{% endif %}
+				
+				{% if datas.has_next %} <!-- 이전 페이지가 없는 경우 -->
+					<a href="/board/list?page={{datas.next_page_number}}">다음&raquo;</a>			
+				{% endif %}
+					
+				&nbsp;&nbsp;
+				(페이지:{{datas.number}} / {{datas.paginator.num_pages}})
+			</div>
+			{% endif %}
+			<hr/>
+			{% for p in allpage %}
+				{% if p > 0 %}
+					{% if p == datas.number %} <!-- 현재 페이지 -->
+						[{{p}}]
+					{% elif p != datas.number %}
+						<a href="/sangpum/list?page={{p}}">{{p}}</a>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</td>
+	</tr>
+	{% else %}
+	<tr>
+		<td colspan="5">현재 게시글이 없어요!</td>
+	</tr>
+	{% endif %}
+	<tr>
+   		<td colspan="6" style="text-align: center;">
+  			<form action="/board/search" method="post">{%csrf_token%}
+                     <select name="s_type">
+                                <option value="title" selected>글제목</option>
+                                <option value="name">작성자</option>
+                     </select>
+                     <input type="text" name="s_value">
+                     <input type="submit" value="검색">
+           </form>
+   		</td>
+	</tr>
+</table>
+</body>
+</html>
