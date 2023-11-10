@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+<script>
+	let xhr;
+
+	window.onload = function () {
+		document.querySelector("#btn1").addEventListener("click", () => {
+			xhr = new XMLHttpRequest();
+
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === XMLHttpRequest.DONE) {
+					if (xhr.status === 200) { // 200이면 요청한 파일에 이상이 없다
+						process1();
+					}
+				}
+			}
+
+			url = "startajax?msg=" + document.querySelector("#txtMsg").value;
+			xhr.open("GET", url, true)  // 비동기 방식이기 때문에 true
+			xhr.send();
+		})
+
+		function process1() {
+			//alert(xhr.responseText);
+			let parseData = JSON.parse(xhr.responseText)
+			document.querySelector("#show1").innerText = parseData.key;
+		}
+
+		document.querySelector("#btn2").onclick = function () {
+			xhr = new XMLHttpRequest();
+
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === XMLHttpRequest.DONE) {
+					if (xhr.status === 200) {
+						process2();
+					}
+				}
+			}
+			url = "goajax";
+			xhr.open("GET", url, true)  // 비동기 방식을 쓸거기때문에 true를 써야한다
+			xhr.send();  // http요청 겟방식?
+		}
+		function process2() {
+			//alert(xhr.responseText);
+			let parseData2 = JSON.parse(xhr.responseText)
+			let ss = "";
+			for (let i = 0; i < parseData2.length; i++) {
+				ss += parseData2[i].irum + " " + parseData2[i].nai + "<br/>";
+			}
+			document.querySelector("#show2").innerHTML = ss;
+		}
+
+		document.querySelector("#btn3").onclick = function () {
+			const url = "chulbalajax";
+			fetch(url).then(res => {
+				if (res.status === 200) {
+					return res.json()
+				} else {
+					console.error('httpe err status : ${res.status}')
+				}
+			})
+				.then(jsonData => {
+					process3(jsonData)
+
+				})
+				.catch(err => {
+					console.log(err)
+				})
+		}
+		function process3(jsonData){
+			//alert(jsonData)
+			let ss = "";
+			for (let i = 0; i < jsonData.length; i++) {
+				ss += jsonData[i].irum + " " + jsonData[i].nai + "<br/>";
+			}
+			document.querySelector("#show3").innerHTML = ss;
+		}
+	}
+</script>
+</head>
+<body>
+Ajax Test <p/>
+자료 입력 : <input type="text" id="txtMsg" value="korea"/>
+<button id="btn1">test1</button><br/>
+<div id="show1"></div>
+<hr/>
+<button id="btn2">test2</button><br/>
+<div id="show2"></div>
+<hr/>
+<button id="btn3">test3</button><br/>
+<div id="show3"></div>
+</body>
+</html>
