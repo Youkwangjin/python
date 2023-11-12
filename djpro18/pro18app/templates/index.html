@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+		$(document).ready(function () {
+			$("#btnOk").click(function () {
+				let name = $("#txtName").val();
+				$("#showData").empty();
+
+				$.ajax({
+					url: 'list',
+					type: 'get',
+					data: {'name': name},
+					success: function (data) {
+						//alert(data);
+						if(data == ''){
+						$("#showData").empty();
+						$("#showData").append("해당 자료가 없습니다.").css("color", "red");
+						}else{
+							let str = "<table border = '1'>";
+							let count = 0;
+							str += "<tr><th>직원번호</th><th>직원명</th><th>부서명</th></tr>";
+							$.each(data, function(ind, entry){
+								str += "<tr>";
+								str += "<td>" + entry['jikwon_no'] + "</td>";
+								str += "<td>" + entry['jikwon_name'] + "</td>";
+								str += "<td>" + entry['buser_name'] + "</td>";
+								str += "</tr>";
+								count += 1;
+							});
+							str += "</table>";
+							$("#showData").append(str);
+							$("#showData").append("건수 : " + count);
+						}
+					}, error: function () {
+						$("#showData").text("에러가 발생했습니다.").css("color", "red");
+					}
+				});
+			})
+		});
+</script>
+<title>Index</title>
+</head>
+<body>
+<h2>메인 홈페이지</h2>
+직원정보 입력<br/><br/>
+직급 : 
+<input type="text" name="name" id="txtName">
+<input type="button" id="btnOk" value="결과보기"><br/>
+<div id="showData"></div>
+</body>
+</html>
