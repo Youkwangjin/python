@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>메인 홈페이지</title>
+<script>
+	let xhr;
+	window.onload = function () {
+		document.querySelector("#click1").addEventListener("click", () => {
+			xhr = new XMLHttpRequest();
+
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === XMLHttpRequest.DONE) {
+					if (xhr.status === 200) { // 200이면 요청한 파일에 이상이 없다
+						process1();
+					}
+				}
+			}
+
+			url = "buger";
+			xhr.open("GET", url, true)  // 비동기 방식이기 때문에 true
+			xhr.send();
+		})
+		
+		function process1() {
+			//alert(xhr.responseText);
+			let parseData = JSON.parse(xhr.responseText)
+			let str ="<table border = 1><tr><th>pname</th><th>description</th><th>price</th><th>주문수량</th><th>확인</th></tr>";
+			let count = 0;
+			for(let i = 0; i < parseData.length; i++){
+				str +="<tr>";
+				str +="<td>" + parseData[i].pname + "</td>";
+				str +="<td>" + parseData[i].description + "</td>";
+				str +="<td>" + parseData[i].price + "</td>";
+				// 주문 수량을 입력하는 input 필드를 추가합니다.
+   			    str += "<td>주문수량 : <input type='number' id='quantity" + parseData[i].id + "'></td>";
+   			    str += "<td><button id=" + parseData[i].id + "'>확인</button></td>";
+				count += 1;
+				str +="</tr>";
+			}
+			str += "</table>";
+			str += "<br>건수 : " + count;
+			str += "<br>전체 가격 : ";
+			document.querySelector("#show1").innerHTML = str;
+		}
+		
+		document.querySelector("#click2").addEventListener("click", () => {
+			xhr = new XMLHttpRequest();
+
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === XMLHttpRequest.DONE) {
+					if (xhr.status === 200) { // 200이면 요청한 파일에 이상이 없다
+						process2();
+					}
+				}
+			}
+			url = "drink";
+			xhr.open("GET", url, true)  // 비동기 방식이기 때문에 true
+			xhr.send();
+		})
+		
+		function process2() {
+			//alert(xhr.responseText);
+			let parseData = JSON.parse(xhr.responseText)
+			let str ="<table border = 1><tr><th>pname</th><th>description</th><th>price</th><th>주문수량</th><th>확인</th></tr>";
+			let count = 0;
+			for(let i = 0; i < parseData.length; i++){
+				str +="<tr>";
+				str +="<td>" + parseData[i].pname + "</td>";
+				str +="<td>" + parseData[i].description + "</td>";
+				str +="<td>" + parseData[i].price + "</td>";
+				// 주문 수량을 입력하는 input 필드를 추가합니다.
+   			    str += "<td>주문수량 : <input type='number' id='quantity" + parseData[i].id + "'></td>";
+   			    str += "<td><button id='confirm_" + parseData[i].id + "'>확인</button></td>";
+				count += 1;
+				str +="</tr>";
+			}
+			str += "</table>";
+			str += "<br>건수 : " + count;
+			str += "<br>전체 가격 : ";
+			document.querySelector("#show1").innerHTML = str;
+		}
+	}
+</script>
+</head>
+<body>
+메뉴 :
+<a href="javascript:void(0)" id="click1">버거</a>
+<a href="javascript:void(0)" id="click2">음료</a>
+이벤트
+<a href="/admin">관리자</a>
+<div id="show1"></div>
+<div id="totalPrice"></div>
+</body>
+</html>

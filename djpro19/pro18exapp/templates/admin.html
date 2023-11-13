@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>admin</title>
+<script>
+	let xhr;
+	window.onload = function () {
+		document.querySelector("#click1").addEventListener("click", () => {
+			xhr = new XMLHttpRequest();
+
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === XMLHttpRequest.DONE) {
+					if (xhr.status === 200) { // 200이면 요청한 파일에 이상이 없다
+						process1();
+					}
+				}
+			}
+
+			url = "listshow";
+			xhr.open("GET", url, true)  // 비동기 방식이기 때문에 true
+			xhr.send();
+		})
+		
+		function process1() {
+			//alert(xhr.responseText);
+			let parseData = JSON.parse(xhr.responseText)
+			let str ="<table border = 1><tr><th>id</th><th>category</th><th>pname</th><th>price</th><th>stock</th><th>description</th></tr>";
+			let count = 0;
+			for(let i = 0; i < parseData.length; i++){
+				str +="<tr>";
+				str +="<td>" + parseData[i].id + "</td>";
+				str +="<td>" + parseData[i].category + "</td>";	
+				str +="<td>" + parseData[i].pname + "</td>";
+				str +="<td>" + parseData[i].price + "</td>";
+				str +="<td>" + parseData[i].stock + "</td>";
+				str +="<td>" + parseData[i].description + "</td>";
+				count += 1;
+				str +="</tr>";
+			}
+			str += "</table>";
+			str += "<br>건수 : " + count;
+			document.querySelector("#show1").innerHTML = str;
+		}
+		
+		document.querySelector("#back").onclick = backFunc; {
+			
+		}
+		function backFunc(){
+			location.href = "/";
+		}
+		
+		
+	}
+	
+</script>
+</head>
+<body>
+<h2>관리자님 환영합니다.</h2>
+<a href="javascript:void(0)" id="click1">상품 보기</a> 
+<a href="insert">상품 추가</a>
+<a href="javascript:void(0)" id="back">메인화면</a>
+<div id="show1"></div>
+</body>
+</html>
