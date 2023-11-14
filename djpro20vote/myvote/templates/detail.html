@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>detail</title>
+</head>
+<body>
+<h2>{{question.question_text}}</h2>
+<b style="color: red;">
+	{% if err_msg %}
+		{{err_msg}}
+	{% endif %}
+	
+</b> <!-- 투표 항목을 선택하지 않은 경우 에러 메세지 출력 -->
+<!-- 운동 항목 -->
+<!-- 원래 방법 
+<form action="/gogo/5/vote">{% csrf_token %}
+-->
+<form action="{% url 'vote' question.id %}" method="post">{% csrf_token %}
+	{% for cho in question.choice_set.all %} {# choice Object를 반환 #}
+		<input type="radio" name="choice" id="cho{{forloop.counter}}" value="{{cho.id}}"/>
+		{# forloop.count : 현재까지의 loop를 실행한 반복 횟수 : 1부터 시작 #}
+		<label for="cho{{forloop.counter}}">{{cho.choice_text}}</label>
+	{% endfor %}
+	<br/><br/>
+	<input type="submit" value="투표확인"/>
+</form>
+</body>
+</html>

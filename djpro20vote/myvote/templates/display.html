@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>display</title>
+</head>
+<body>
+<h2>투표할 질문 항목 선택</h2>
+{% if q_list %}
+	<ul>
+	{% for q in q_list %}
+		{# URL 요청 직접 기술 방법1(hard coding, 정적) #}
+		<li>
+			<a href="/gogo/{{q.id}}">{{q.question_text}}</a>
+		</li>
+		<br/>
+		{# URL 요청 직접 기술 방법2(soft coding, 동적) #}
+		<li><a href="{% url 'detail' q.id %}">{{q.question_text}}</a></li>
+		<hr/>
+	{% endfor %}
+	</ul>
+{% else %}
+	<div>질문 항목이 없어요</div>
+{% endif %}
+</body>
+</html>
