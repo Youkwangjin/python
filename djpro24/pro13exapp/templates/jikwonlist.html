@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>직원 리스트</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+    h2 {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+    table, th, td {
+        border: 1px solid #999;
+    }
+    th, td {
+        padding: 10px;
+        text-align: center;
+    }
+    th {
+        background-color: #333;
+        color: #fff;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(odd) {
+        background-color: #e6e6e6;
+    }
+</style>
+</head>
+<body>
+<h2>* 직원 리스트 *</h2>
+<table border="1" style="width: 80%;">
+    <tr>
+        <th>직원번호</th>
+        <th>직원명</th>
+        <th>직급</th>
+        <th>관리고객</th>
+    </tr>
+    {% if jikwondatas %}
+    {% for j in jikwondatas %}
+    <tr>
+        <td>{{ j.jikwon_no }}</td>
+        <td>
+            {% if j.gogeks > 0 %}
+            <a href="/test/gogeklist?jikwon_no={{j.jikwon_no}}">{{j.jikwon_name}}</a>
+            {% else %}
+            {{j.jikwon_name}}
+            {% endif %}
+        </td>
+        <td>{{ j.jikwon_jik }}</td>
+        <td>{{ j.gogeks }}</td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+        <td colspan="4">자료가 없어요</td>
+    </tr>
+    {% endif %}
+</table>
+</body>
+</html>
