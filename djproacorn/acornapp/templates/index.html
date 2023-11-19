@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>index</title>
+</head>
+<body>
+    <form method="post" action="loginOk/"> {% csrf_token %}
+        사번 : <input type="text" name="jikwon_no" /><br/>
+        이름 : <input type="text" name="jikwon_name" /><br/>
+        <input type="submit" value="로그인">
+    </form>
+</body>
+</html>
